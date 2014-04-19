@@ -1,4 +1,6 @@
-#!/bin/bash -ex
+#!/bin/bash
+
+set -ex
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -13,3 +15,6 @@ mysql -e 'CREATE DATABASE `keystone` CHARACTER SET utf8 COLLATE utf8_general_ci;
 mysql -e 'CREATE DATABASE `glance` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 mysql -e 'CREATE DATABASE `neutron` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 mysql -e 'CREATE DATABASE `nova` CHARACTER SET utf8 COLLATE utf8_general_ci;'
+
+cp /tmp/files/home/vagrant/openrc.admin /home/vagrant/openrc.admin
+cp /tmp/files/home/vagrant/openrc.user /home/vagrant/openrc.user
