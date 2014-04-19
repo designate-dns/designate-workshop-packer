@@ -10,13 +10,13 @@ cp /tmp/files/neutron.conf /etc/neutron/neutron.conf
 cp /tmp/files/dhcp_agent.ini /etc/neutron/dhcp_agent.ini
 cp /tmp/files/l3_agent.ini /etc/neutron/l3_agent.ini
 cp /tmp/files/metadata_agent.ini /etc/neutron/metadata_agent.ini
-cp /tmp/files/ml2/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
+cp /tmp/files/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
 
-#ip link add type veth
+ip link add type veth
 
 ovs-vsctl add-br br-int
 ovs-vsctl add-br br-ex
-# ovs-vsctl add-port br-ex veth0
+ovs-vsctl add-port br-ex veth0
 
 service neutron-server restart
 sleep 5

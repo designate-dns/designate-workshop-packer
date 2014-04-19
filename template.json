@@ -1,10 +1,4 @@
 {
-    "variables": {
-        "ssh_name": "vagrant",
-        "ssh_pass": "vagrant",
-        "hostname": "designate-workshop"
-    },
-
     "builders": [
         {
             "type": "virtualbox-iso",
@@ -33,7 +27,8 @@
             "vboxmanage": [
               ["modifyvm", "{{.Name}}", "--memory", "1024"],
               ["modifyvm", "{{.Name}}", "--cpus", "2"]
-            ]
+            ],
+            "vm_name": "designate-workshop"
         }
     ],
 
