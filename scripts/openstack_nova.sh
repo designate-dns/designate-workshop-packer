@@ -19,3 +19,9 @@ service nova-scheduler restart
 service nova-conductor restart
 service nova-novncproxy restart
 service nova-compute restart
+
+sleep 5
+
+source /home/vagrant/openrc.admin
+
+nova image-list
