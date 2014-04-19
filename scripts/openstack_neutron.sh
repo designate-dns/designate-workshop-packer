@@ -6,11 +6,11 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get --yes install neutron-server neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms neutron-l3-agent neutron-dhcp-agent
 
-cp /tmp/files/etc/neutron/neutron.conf /etc/neutron/neutron.conf
-cp /tmp/files/etc/neutron/dhcp_agent.conf /etc/neutron/dhcp_agent.conf
-cp /tmp/files/etc/neutron/l3_agent.conf /etc/neutron/l3_agent.conf
-cp /tmp/files/etc/neutron/metadata_agent.conf /etc/neutron/metadata_agent.conf
-cp /tmp/files/etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
+cp /tmp/files/neutron.conf /etc/neutron/neutron.conf
+cp /tmp/files/dhcp_agent.conf /etc/neutron/dhcp_agent.conf
+cp /tmp/files/l3_agent.conf /etc/neutron/l3_agent.conf
+cp /tmp/files/metadata_agent.conf /etc/neutron/metadata_agent.conf
+cp /tmp/files/ml2/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
 
 rm /var/lib/neutron/neutron.sqlite
 

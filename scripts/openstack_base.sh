@@ -16,5 +16,13 @@ mysql -e 'CREATE DATABASE `glance` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 mysql -e 'CREATE DATABASE `neutron` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 mysql -e 'CREATE DATABASE `nova` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 
-cp /tmp/files/home/vagrant/openrc.admin /home/vagrant/openrc.admin
-cp /tmp/files/home/vagrant/openrc.user /home/vagrant/openrc.user
+echo "/tmp/files"
+find /tmp/files || true
+
+echo "/tmp/etc"
+find /tmp/etc || true
+
+cp /tmp/files/openrc.admin /root/openrc.admin
+cp /tmp/files/openrc.user /root/openrc.user
+cp /tmp/files/openrc.admin /home/vagrant/openrc.admin
+cp /tmp/files/openrc.user /home/vagrant/openrc.user

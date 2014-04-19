@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get --yes install keystone
 
-cp /tmp/files/etc/keystone/keystone.conf /etc/keystone/keystone.conf
+cp /tmp/files/keystone.conf /etc/keystone/keystone.conf
 
 rm /var/lib/keystone/keystone.db
 
