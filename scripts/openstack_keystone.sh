@@ -8,8 +8,6 @@ apt-get --yes install keystone
 
 cp /tmp/files/keystone.conf /etc/keystone/keystone.conf
 
-rm /var/lib/keystone/keystone.db
-
 su -s /bin/sh -c "keystone-manage db_sync" keystone
 
 service keystone restart

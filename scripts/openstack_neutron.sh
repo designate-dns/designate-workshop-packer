@@ -12,11 +12,11 @@ cp /tmp/files/l3_agent.conf /etc/neutron/l3_agent.conf
 cp /tmp/files/metadata_agent.conf /etc/neutron/metadata_agent.conf
 cp /tmp/files/ml2/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
 
-rm /var/lib/neutron/neutron.sqlite
+#ip link add type veth
 
 ovs-vsctl add-br br-int
 ovs-vsctl add-br br-ex
-#ovs-vsctl add-port br-ex eth1
+# ovs-vsctl add-port br-ex veth0
 
 service neutron-server restart
 sleep 5

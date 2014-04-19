@@ -2,3 +2,4 @@ packer
 packer_cache
 *.box
 output-*
+files.tar.gz

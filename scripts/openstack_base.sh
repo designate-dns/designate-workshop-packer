@@ -16,11 +16,9 @@ mysql -e 'CREATE DATABASE `glance` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 mysql -e 'CREATE DATABASE `neutron` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 mysql -e 'CREATE DATABASE `nova` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 
-echo "/tmp/files"
-find /tmp/files || true
-
-echo "/tmp/etc"
-find /tmp/etc || true
+pushd /tmp
+tar xfz files.tar.gz
+popd
 
 cp /tmp/files/openrc.admin /root/openrc.admin
 cp /tmp/files/openrc.user /root/openrc.user

@@ -35,8 +35,8 @@
     "provisioners": [
         {
           "type": "file",
-          "source": "files/",
-          "destination": "/tmp/files/"
+          "source": "files.tar.gz",
+          "destination": "/tmp/files.tar.gz"
         },
         {
             "type": "shell",
@@ -49,6 +49,7 @@
                 "scripts/openstack_nova.sh",
                 "scripts/openstack_neutron.sh",
                 "scripts/workshop.sh",
+                "scripts/openstack_cleanup.sh",
                 "scripts/vm_cleanup.sh"
             ],
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
