@@ -35,8 +35,13 @@
     "provisioners": [
         {
           "type": "file",
-          "source": "files/",
-          "destination": "/tmp/files/"
+          "source": "files/etc/",
+          "destination": "/tmp/files/etc/"
+        },
+        {
+          "type": "file",
+          "source": "files/home/",
+          "destination": "/tmp/files/home/"
         },
         {
             "type": "shell",
