@@ -14,4 +14,7 @@ su -s /bin/sh -c "glance-manage db_sync" glance
 service glance-registry restart
 service glance-api restart
 
-# TODO: Download + Install CirrOS image
+sleep 5
+
+wget -O /tmp/cirros-0.3.2-x86_64-disk.img http://cdn.download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img
+glance image-create --name "cirros-0.3.2-x86_64" --disk-format qcow2 --container-format bare --is-public True --progress < /tmp/cirros-0.3.2-x86_64-disk.img

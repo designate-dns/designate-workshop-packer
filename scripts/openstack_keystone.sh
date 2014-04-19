@@ -12,6 +12,8 @@ su -s /bin/sh -c "keystone-manage db_sync" keystone
 
 service keystone restart
 
+sleep 5
+
 export OS_SERVICE_TOKEN=zEDreswACrAChequSWA5EtremawAwaXe
 export OS_SERVICE_ENDPOINT=http://127.0.0.1:35357/v2.0
 
