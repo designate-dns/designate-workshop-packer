@@ -5,6 +5,7 @@ iface lo inet loopback
 # The primary network interface
 auto eth0
 iface eth0 inet dhcp
+    pre-up sleep 2
 
 auto veth0
 iface veth0 inet manual

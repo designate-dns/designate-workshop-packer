@@ -23,13 +23,15 @@
             "virtualbox_version_file": ".vbox_version",
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
-            "headless": true,
+            "headless": false,
             "vboxmanage": [
               ["modifyvm", "{{.Name}}", "--memory", "1024"],
               ["modifyvm", "{{.Name}}", "--cpus", "2"],
               ["modifyvm", "{{.Name}}", "--hwvirtex", "on"]
             ],
-            "vm_name": "designate-workshop"
+            "vm_name": "designate-workshop",
+            "disk_size": 20000,
+            "hard_drive_interface": "sata"
         }
     ],
 
@@ -47,13 +49,20 @@
                 "scripts/openstack_base.sh",
                 "scripts/openstack_keystone.sh",
                 "scripts/openstack_glance.sh",
-                "scripts/openstack_nova.sh",
                 "scripts/openstack_neutron.sh",
+                "scripts/openstack_nova.sh",
                 "scripts/workshop.sh",
                 "scripts/openstack_cleanup.sh",
                 "scripts/vm_cleanup.sh"
             ],
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         }
+    ],
+
+    "post-processors": [
+      {
+        "type": "vagrant",
+        "compression_level": 1
+      }
     ]
 }
