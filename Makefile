@@ -1,4 +1,7 @@
-all: files packer
+all: clean files packer
+
+clean:
+	rm -rf output-* files.tar.gz
 
 files:
 	tar -czf files.tar.gz files
@@ -6,4 +9,4 @@ files:
 packer:
 	./packer/packer build template.json
 
-.PHONY: all files packer
+.PHONY: all clean files packer

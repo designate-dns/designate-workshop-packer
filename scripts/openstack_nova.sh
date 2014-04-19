@@ -20,8 +20,10 @@ service nova-conductor restart
 service nova-novncproxy restart
 service nova-compute restart
 
-sleep 5
+sleep 10
 
 source /home/vagrant/openrc.admin
 
-nova image-list
+nova flavor-create --is-public True m1.xtiny 200 256 1 1
+nova flavor-create --is-public True m1.xxtiny 201 128 1 1
+nova flavor-create --is-public True m1.xxxtiny 202 64 1 1
