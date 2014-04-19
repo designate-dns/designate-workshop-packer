@@ -9,3 +9,8 @@ apt-get update
 
 apt-get install --yes git mysql-server rabbitmq-server python-pip python-virtualenv
 apt-get install --yes python-novaclient python-glanceclient python-keystoneclient python-neutronclient
+
+mysql -e 'CREATE DATABASE `keystone` CHARACTER SET utf8 COLLATE utf8_general_ci;'
+mysql -e 'CREATE DATABASE `glance` CHARACTER SET utf8 COLLATE utf8_general_ci;'
+mysql -e 'CREATE DATABASE `neutron` CHARACTER SET utf8 COLLATE utf8_general_ci;'
+mysql -e 'CREATE DATABASE `nova` CHARACTER SET utf8 COLLATE utf8_general_ci;'

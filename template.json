@@ -34,6 +34,11 @@
 
     "provisioners": [
         {
+          "type": "file",
+          "source": "files",
+          "destination": "/tmp"
+        },
+        {
             "type": "shell",
             "scripts": [
                 "scripts/vagrant.sh",
@@ -47,13 +52,6 @@
                 "scripts/vm_cleanup.sh"
             ],
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-        }
-    ],
-
-    "post-processors": [
-        {
-            "type": "vagrant",
-            "keep_input_artifact": true
         }
     ]
 }
