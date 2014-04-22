@@ -52,7 +52,6 @@
                 "scripts/openstack_neutron.sh",
                 "scripts/openstack_nova.sh",
                 "scripts/workshop.sh",
-                "scripts/openstack_cleanup.sh",
                 "scripts/vm_cleanup.sh"
             ],
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
