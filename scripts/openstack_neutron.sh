@@ -34,7 +34,7 @@ sleep 5
 source /home/vagrant/openrc.admin
 
 # Create default external network
-neutron net-create ext-net --shared --router:external=True
+neutron net-create ext-net --router:external=True
 neutron subnet-create ext-net --name ext-subnet \
   --allocation-pool start=172.31.255.10,end=172.31.255.254 \
   --disable-dhcp --gateway 172.31.255.1 172.31.255.0/24
@@ -47,7 +47,7 @@ neutron router-interface-add admin-router admin-subnet
 neutron router-gateway-set admin-router ext-net
 
 ADMIN_NETWORK_ID=`neutron net-list | grep ' admin-network ' | cut -d' ' -f2`
-echo $ADMIN_NETWORK_ID > /home/vagrant/network.admin
+echo "export OS_NETWORK_ID=$ADMIN_NETWORK_ID" >> /home/vagrant/openrc.admin
 
 # Create default networking config for user tenant
 source /home/vagrant/openrc.user
@@ -58,4 +58,4 @@ neutron router-interface-add user-router user-subnet
 neutron router-gateway-set user-router ext-net
 
 USER_NETWORK_ID=`neutron net-list | grep ' user-network ' | cut -d' ' -f2`
-echo $USER_NETWORK_ID > /home/vagrant/network.user
+echo "export OS_NETWORK_ID=$USER_NETWORK_ID" >> /home/vagrant/openrc.user

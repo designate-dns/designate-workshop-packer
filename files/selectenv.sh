@@ -1,0 +1,2 @@
+TOKEN=`./getusertoken $OS_USERNAME $OS_PASSWORD $OS_TENANT_NAME`
+export TOKEN

@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.network "forwarded_port", guest: 80, host: 8080
-  
+
   config.vm.provider "virtualbox" do |box|
   	box.customize ["modifyvm", :id, "--memory", "2048"]
   	box.customize ["modifyvm", :id, "--cpus",   "2"]
