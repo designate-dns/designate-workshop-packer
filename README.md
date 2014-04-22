@@ -16,4 +16,11 @@ Customizing the VM
 
 Add a new script file to the "scripts" directory, and add a reference to it in the template.json file. The contents of the "files" folder will be available on the VM as /tmp/files.
 
-The end result will be a VirtualBox VM in the 'output-*' folder, and a Vagrant Box in the '*.box' file.
+The end result will be a Vagrant Box in the '*.box' file.
+
+Using the VM
+============
+
+Build the VM (`make`), then boot the VM using `vagrant up`. Once booted, login with `vagrant ssh`.
+
+Keystone/Glance/Nova/Neutron are installed and configured. Designate and Designate client git repos are pre-cloned to /home/vagrant.
