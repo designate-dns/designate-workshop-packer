@@ -1,9 +1,10 @@
 Requirements
 ============
 
-* Packer 0.5.2 (To Build the VM)
-* VirtualBox 4.3
-* Vagrant 1.5.3
+* GNU Make (Needed only to build the VM - You can execute the steps by hand if you don't/can't have Make installed)
+* Packer 0.5.2 (Needed only to build the VM)
+* VirtualBox 4.3 (Needed to build and run the VM)
+* Vagrant 1.5.3 (Needed to run the VM)
 
 Building the VM
 ===============
