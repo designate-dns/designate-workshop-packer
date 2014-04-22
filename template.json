@@ -63,7 +63,7 @@
       {
         "type": "vagrant",
         "compression_level": 1,
-        "output": "{{.Name}}_{{.Provider}}.box"
+        "output": "designate-workshop_{{.Provider}}.box"
       }
     ]
 }
