@@ -51,6 +51,7 @@
                 "scripts/openstack_glance.sh",
                 "scripts/openstack_neutron.sh",
                 "scripts/openstack_nova.sh",
+                "scripts/openstack_horizon.sh",
                 "scripts/workshop.sh",
                 "scripts/vm_cleanup.sh"
             ],
