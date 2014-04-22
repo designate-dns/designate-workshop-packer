@@ -61,7 +61,8 @@
     "post-processors": [
       {
         "type": "vagrant",
-        "compression_level": 1
+        "compression_level": 1,
+        "output": "{{.Name}}_{{.Provider}}.box"
       }
     ]
 }
