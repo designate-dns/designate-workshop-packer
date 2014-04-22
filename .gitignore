@@ -1,4 +1,5 @@
 packer
+packer.zip
 packer_cache
 *.box
 output-*
