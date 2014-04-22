@@ -27,3 +27,9 @@ source /home/vagrant/openrc.admin
 nova flavor-create --is-public True m1.xtiny 200 256 1 1
 nova flavor-create --is-public True m1.xxtiny 201 128 1 1
 nova flavor-create --is-public True m1.xxxtiny 202 64 1 1
+
+nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
+
+source /home/vagrant/openrc.user
+
+nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
