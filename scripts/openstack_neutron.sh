@@ -6,11 +6,15 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get --yes install neutron-server neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms neutron-l3-agent neutron-dhcp-agent
 
+ADMIN_TENANT_ID=`keystone tenant-list | grep ' admin ' | cut -d' ' -f2`
+
 cp /tmp/files/neutron.conf /etc/neutron/neutron.conf
 cp /tmp/files/dhcp_agent.ini /etc/neutron/dhcp_agent.ini
 cp /tmp/files/l3_agent.ini /etc/neutron/l3_agent.ini
 cp /tmp/files/metadata_agent.ini /etc/neutron/metadata_agent.ini
 cp /tmp/files/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
+
+sed -i "s/%ADMIN_TENANT_ID%/$ADMIN_TENANT_ID/" /etc/neutron/neutron.conf
 
 ip link add type veth
 
