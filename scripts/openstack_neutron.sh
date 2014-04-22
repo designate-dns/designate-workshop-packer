@@ -46,6 +46,9 @@ neutron router-create admin-router
 neutron router-interface-add admin-router admin-subnet
 neutron router-gateway-set admin-router ext-net
 
+ADMIN_NETWORK_ID=`neutron net-list | grep ' admin-network ' | cut -d' ' -f2`
+echo $ADMIN_NETWORK_ID > /home/vagrant/network.admin
+
 # Create default networking config for user tenant
 source /home/vagrant/openrc.user
 neutron net-create user-network
@@ -53,3 +56,6 @@ neutron subnet-create user-network --name user-subnet --gateway 172.31.253.1 172
 neutron router-create user-router
 neutron router-interface-add user-router user-subnet
 neutron router-gateway-set user-router ext-net
+
+USER_NETWORK_ID=`neutron net-list | grep ' user-network ' | cut -d' ' -f2`
+echo $USER_NETWORK_ID > /home/vagrant/network.user

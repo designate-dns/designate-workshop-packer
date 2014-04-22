@@ -23,7 +23,5 @@ popd
 
 #cp /tmp/files/interfaces /etc/network/interfaces
 
-cp /tmp/files/openrc.admin /root/openrc.admin
-cp /tmp/files/openrc.user /root/openrc.user
 cp /tmp/files/openrc.admin /home/vagrant/openrc.admin
 cp /tmp/files/openrc.user /home/vagrant/openrc.user
