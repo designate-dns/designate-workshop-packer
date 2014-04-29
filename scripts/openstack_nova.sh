@@ -20,7 +20,7 @@ service nova-conductor restart
 service nova-novncproxy restart
 service nova-compute restart
 
-sleep 10
+sleep 20
 
 source /home/vagrant/openrc.admin
 

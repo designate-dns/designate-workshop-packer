@@ -25,7 +25,7 @@
             "ssh_password": "vagrant",
             "headless": false,
             "vboxmanage": [
-              ["modifyvm", "{{.Name}}", "--memory", "1024"],
+              ["modifyvm", "{{.Name}}", "--memory", "1536"],
               ["modifyvm", "{{.Name}}", "--cpus", "2"],
               ["modifyvm", "{{.Name}}", "--hwvirtex", "on"]
             ],

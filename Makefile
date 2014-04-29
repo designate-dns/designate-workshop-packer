@@ -19,7 +19,7 @@ clean:
 files:
 	tar -czf files.tar.gz files
 
-build:
+build: packer files
 	./packer/packer build template.json
 
 .PHONY: all clean files build
