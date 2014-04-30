@@ -33,9 +33,15 @@ keystone tenant-create --name=admin --description="Admin Tenant"
 keystone user-role-add --user=admin --tenant=admin --role=admin
 keystone user-role-add --user=admin --tenant=admin --role=_member_
 
-keystone user-create --name=user --pass=password --email=user@designate-workshop.com
-keystone tenant-create --name=user --description="User Tenant"
-keystone user-role-add --user=user --tenant=user --role=_member_
+keystone user-create --name=user1 --pass=password --email=user1@designate-workshop.com
+keystone user-create --name=user2 --pass=password --email=user2@designate-workshop.com
+keystone tenant-create --name=tenantA --description="Tenant A"
+keystone user-role-add --user=user1 --tenant=tenantA --role=_member_
+keystone user-role-add --user=user2 --tenant=tenantA --role=_member_
+
+keystone user-create --name=user3 --pass=password --email=user3@designate-workshop.com
+keystone tenant-create --name=tenantB --description="Tenant B"
+keystone user-role-add --user=user3 --tenant=tenantB --role=_member_
 
 # Services
 keystone service-create --name=keystone --type=identity --description="OpenStack Identity Service"

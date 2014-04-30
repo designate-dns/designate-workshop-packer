@@ -30,6 +30,14 @@ nova flavor-create --is-public True m1.xxxtiny 202 64 1 1
 
 nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
 
-source /home/vagrant/openrc.user
+source /home/vagrant/openrc.user1
+
+nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
+
+source /home/vagrant/openrc.user2
+
+nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
+
+source /home/vagrant/openrc.user3
 
 nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant

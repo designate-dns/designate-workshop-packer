@@ -49,13 +49,25 @@ neutron router-gateway-set admin-router ext-net
 ADMIN_NETWORK_ID=`neutron net-list | grep ' admin-network ' | cut -d' ' -f2`
 echo "export OS_NETWORK_ID=$ADMIN_NETWORK_ID" >> /home/vagrant/openrc.admin
 
-# Create default networking config for user tenant
-source /home/vagrant/openrc.user
-neutron net-create user-network
-neutron subnet-create user-network --name user-subnet --gateway 172.31.253.1 172.31.253.0/24
-neutron router-create user-router
-neutron router-interface-add user-router user-subnet
-neutron router-gateway-set user-router ext-net
+# Create default networking config for tenant A
+source /home/vagrant/openrc.user1
+neutron net-create tenantA-network
+neutron subnet-create tenantA-network --name tenantA-subnet --gateway 172.31.252.1 172.31.252.0/24
+neutron router-create tenantA-router
+neutron router-interface-add tenantA-router tenantA-subnet
+neutron router-gateway-set tenantA-router ext-net
 
-USER_NETWORK_ID=`neutron net-list | grep ' user-network ' | cut -d' ' -f2`
-echo "export OS_NETWORK_ID=$USER_NETWORK_ID" >> /home/vagrant/openrc.user
+TENANTA_NETWORK_ID=`neutron net-list | grep ' tenantA-network ' | cut -d' ' -f2`
+echo "export OS_NETWORK_ID=$TENANTA_NETWORK_ID" >> /home/vagrant/openrc.user1
+echo "export OS_NETWORK_ID=$TENANTA_NETWORK_ID" >> /home/vagrant/openrc.user2
+
+# Create default networking config for tenant B
+source /home/vagrant/openrc.user3
+neutron net-create tenantB-network
+neutron subnet-create tenantB-network --name tenantB-subnet --gateway 172.31.253.1 172.31.253.0/24
+neutron router-create tenantB-router
+neutron router-interface-add tenantB-router tenantB-subnet
+neutron router-gateway-set tenantB-router ext-net
+
+TENANTB_NETWORK_ID=`neutron net-list | grep ' tenantB-network ' | cut -d' ' -f2`
+echo "export OS_NETWORK_ID=$TENANTB_NETWORK_ID" >> /home/vagrant/openrc.user3
