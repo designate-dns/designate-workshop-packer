@@ -19,7 +19,7 @@ TEMPORARY_TOKEN=`curl -s \
 -H "Accept: application/json" \
 -X POST \
 -d '{"auth": {"passwordCredentials": {"username": "'$USERNAME'", "password": "'$PASSWORD'"}}}' \
-$KEYSTONE_URL/tokens | ./JSON.sh | grep -F -e "[\"access\",\"token\",\"id\"]" | sed -e 's/^.*   //' -e 's/^"//' -e 's/"$//'`
+$KEYSTONE_URL/tokens | ./JSON.sh | grep -F -e "[\"access\",\"token\",\"id\"]" | sed -e 's/^.*[ \t]//' -e 's/^"//' -e 's/"$//'`
 
 curl -s \
 -H "Content-Type: application/json" \
@@ -51,7 +51,7 @@ PERMANENT_TOKEN=`curl -s \
 -H "Accept: application/json" \
 -X POST \
 -d '{"auth": {"project": "'$TENANT'", "passwordCredentials": {"username": "'$USERNAME'", "password": "'$PASSWORD'"}, "tenantId": "'$TENANT_ID'"}}' \
-$KEYSTONE_URL/tokens | ./JSON.sh | grep -F -e "[\"access\",\"token\",\"id\"]" | sed -e 's/^.*   //' -e 's/^"//' -e 's/"$//'`
+$KEYSTONE_URL/tokens | ./JSON.sh | grep -F -e "[\"access\",\"token\",\"id\"]" | sed -e 's/^.*[ \t]//' -e 's/^"//' -e 's/"$//'`
 
 echo $PERMANENT_TOKEN
 

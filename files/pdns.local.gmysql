@@ -6,7 +6,7 @@ launch=gmysql
 # gmysql parameters
 gmysql-host=localhost
 gmysql-port=
-gmysql-dbname=powerdns
+gmysql-dbname=pdns
 gmysql-user=root
 gmysql-password=
 gmysql-dnssec=yes
