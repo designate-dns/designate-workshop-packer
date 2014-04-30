@@ -25,6 +25,7 @@ cp /tmp/files/getserver.sh /home/vagrant/getserver.sh
 cp /tmp/files/listservers.sh /home/vagrant/listservers.sh
 cp /tmp/files/getusertoken.sh /home/vagrant/getusertoken.sh
 cp /tmp/files/selectenv.sh /home/vagrant/selectenv.sh
+cp /tmp/files/designate.conf /home/vagrant/designate/etc/designate/designate.conf.wkshp
 chown vagrant:vagrant /home/vagrant/JSON.sh
 chown vagrant:vagrant /home/vagrant/createserver.sh
 chown vagrant:vagrant /home/vagrant/deleteserver.sh
@@ -36,6 +37,7 @@ chown vagrant:vagrant /home/vagrant/openrc.admin
 chown vagrant:vagrant /home/vagrant/openrc.user1
 chown vagrant:vagrant /home/vagrant/openrc.user2
 chown vagrant:vagrant /home/vagrant/openrc.user3
+chown vagrant:vagrant /home/vagrant/designate/etc/designate/designate.conf.wkshp
 chmod 740 /home/vagrant/JSON.sh
 chmod 740 /home/vagrant/createserver.sh
 chmod 740 /home/vagrant/deleteserver.sh
