@@ -48,10 +48,15 @@ chmod 740 /home/vagrant/selectenv.sh
 
 # Install Required Packages
 apt-get --yes install curl
+apt-get build-dep --yes python-lxml
 
-#Clone the designate repos locally
+# Clone the designate repos locally
 sudo -u vagrant git clone https://github.com/stackforge/designate.git /home/vagrant/designate
 sudo -u vagrant git clone https://github.com/stackforge/python-designateclient.git /home/vagrant/python-designateclient
+
+# Pre-Install Designate's Dependancies
+pip install -r /home/vagrant/designate/requirements.txt
+pip install -r /home/vagrant/python-designateclient/requirements.txt
 
 # Make sure everything in vagrant's home is owned by vagrant
 chown -R vagrant /home/vagrant
