@@ -6,6 +6,8 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get --yes install neutron-server neutron-plugin-ml2 neutron-plugin-openvswitch-agent openvswitch-datapath-dkms neutron-l3-agent neutron-dhcp-agent
 
+source /home/vagrant/openrc.admin
+
 ADMIN_TENANT_ID=`keystone tenant-list | grep ' admin ' | cut -d' ' -f2`
 
 cp /tmp/files/neutron.conf /etc/neutron/neutron.conf
@@ -30,8 +32,6 @@ service neutron-dhcp-agent restart
 service neutron-metadata-agent restart
 
 sleep 5
-
-source /home/vagrant/openrc.admin
 
 # Create default external network
 neutron net-create ext-net --router:external=True
