@@ -26,6 +26,8 @@ cp /tmp/files/listservers.sh /home/vagrant/listservers.sh
 cp /tmp/files/getusertoken.sh /home/vagrant/getusertoken.sh
 cp /tmp/files/selectenv.sh /home/vagrant/selectenv.sh
 cp /tmp/files/designate.conf /home/vagrant/designate.conf.wkshp
+cp /tmp/files/install-designate.sh /home/vagrant/install-designate.sh
+cp /tmp/files/install.txt /home/vagrant/install.txt
 chown vagrant:vagrant /home/vagrant/JSON.sh
 chown vagrant:vagrant /home/vagrant/createserver.sh
 chown vagrant:vagrant /home/vagrant/deleteserver.sh
@@ -38,6 +40,8 @@ chown vagrant:vagrant /home/vagrant/openrc.user1
 chown vagrant:vagrant /home/vagrant/openrc.user2
 chown vagrant:vagrant /home/vagrant/openrc.user3
 chown vagrant:vagrant /home/vagrant/designate.conf.wkshp
+chown vagrant:vagrant /home/vagrant/install-designate.sh
+chown vagrant:vagrant /home/vagrant/install.txt
 chmod 740 /home/vagrant/JSON.sh
 chmod 740 /home/vagrant/createserver.sh
 chmod 740 /home/vagrant/deleteserver.sh
@@ -45,6 +49,7 @@ chmod 740 /home/vagrant/getserver.sh
 chmod 740 /home/vagrant/listservers.sh
 chmod 740 /home/vagrant/getusertoken.sh
 chmod 740 /home/vagrant/selectenv.sh
+chmod 740 /home/vagrant/install-designate.sh
 
 # Install Required Packages
 apt-get --yes install curl
