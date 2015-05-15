@@ -41,11 +41,14 @@ popd
 cp /tmp/files/designate.conf /home/vagrant/designate.conf.workshop
 cp /tmp/files/designate.conf /home/vagrant/designate/etc/designate/designate.conf
 cp /tmp/files/install-designate.sh /home/vagrant/install-designate.sh
+cp /tmp/files/example.py /home/vagrant/example.py
 
 # Make sure everything in vagrant's home is owned by vagrant
 chown -R vagrant:vagrant /home/vagrant/*
 chown -R vagrant:vagrant /home/vagrant/.cache
 chmod 775 /home/vagrant/*.sh
+chmod 775 /home/vagrant/example.py
+chmod +x /home/vagrant/example.py
 
 wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
 sudo python /tmp/get-pip.py

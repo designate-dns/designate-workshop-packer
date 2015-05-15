@@ -58,7 +58,7 @@ source /home/vagrant/openrc.admin
 keystone service-list | grep designate | awk '{print $2}' | xargs --no-run-if-empty -n 1 keystone service-delete
 
 keystone service-create --name designate --type dns --description "Designate Service"
-keystone endpoint-create --service designate --publicurl http://127.0.0.1:9001/v1 --adminurl http://127.0.0.1:9001/v1 --internalurl http://127.0.0.1:9001/v1
+keystone endpoint-create --service designate --publicurl http://127.0.0.1:9001 --adminurl http://127.0.0.1:9001 --internalurl http://127.0.0.1:9001
 
 # Install Designate Client
 cd /home/vagrant/python-designateclient
