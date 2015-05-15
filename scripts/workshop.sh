@@ -11,57 +11,41 @@ echo "pdns-backend-mysql	pdns-backend-mysql/dbconfig-install	boolean	false" | de
 apt-get --yes install pdns-server pdns-backend-mysql
 
 cp /tmp/files/pdns.conf /etc/powerdns/pdns.conf
-cp /tmp/files/pdns.local.gmysql /etc/powerdns/pdns.d/pdns.local.gmysql
 
+rm /etc/powerdns/bindbackend.conf /etc/powerdns/pdns.d/*
 chmod 755 /etc/powerdns/pdns.d
 chmod 644 /etc/powerdns/pdns.conf
-chmod 644 /etc/powerdns/pdns.d/*
-
-# Copy over base files for the workshop
-cp /tmp/files/JSON.sh /home/vagrant/JSON.sh
-cp /tmp/files/createserver.sh /home/vagrant/createserver.sh
-cp /tmp/files/deleteserver.sh /home/vagrant/deleteserver.sh
-cp /tmp/files/getserver.sh /home/vagrant/getserver.sh
-cp /tmp/files/listservers.sh /home/vagrant/listservers.sh
-cp /tmp/files/getusertoken.sh /home/vagrant/getusertoken.sh
-cp /tmp/files/selectenv.sh /home/vagrant/selectenv.sh
-cp /tmp/files/designate.conf /home/vagrant/designate.conf.wkshp
-cp /tmp/files/install-designate.sh /home/vagrant/install-designate.sh
-cp /tmp/files/install.txt /home/vagrant/install.txt
-chown vagrant:vagrant /home/vagrant/JSON.sh
-chown vagrant:vagrant /home/vagrant/createserver.sh
-chown vagrant:vagrant /home/vagrant/deleteserver.sh
-chown vagrant:vagrant /home/vagrant/getserver.sh
-chown vagrant:vagrant /home/vagrant/listservers.sh
-chown vagrant:vagrant /home/vagrant/getusertoken.sh
-chown vagrant:vagrant /home/vagrant/selectenv.sh
-chown vagrant:vagrant /home/vagrant/openrc.admin
-chown vagrant:vagrant /home/vagrant/openrc.user1
-chown vagrant:vagrant /home/vagrant/openrc.user2
-chown vagrant:vagrant /home/vagrant/openrc.user3
-chown vagrant:vagrant /home/vagrant/designate.conf.wkshp
-chown vagrant:vagrant /home/vagrant/install-designate.sh
-chown vagrant:vagrant /home/vagrant/install.txt
-chmod 740 /home/vagrant/JSON.sh
-chmod 740 /home/vagrant/createserver.sh
-chmod 740 /home/vagrant/deleteserver.sh
-chmod 740 /home/vagrant/getserver.sh
-chmod 740 /home/vagrant/listservers.sh
-chmod 740 /home/vagrant/getusertoken.sh
-chmod 740 /home/vagrant/selectenv.sh
-chmod 740 /home/vagrant/install-designate.sh
 
 # Install Required Packages
 apt-get --yes install curl
 apt-get build-dep --yes python-lxml
 
 # Clone the designate repos locally
-sudo -u vagrant git clone https://github.com/stackforge/designate.git /home/vagrant/designate
-sudo -u vagrant git clone https://github.com/stackforge/python-designateclient.git /home/vagrant/python-designateclient
+sudo -u vagrant git clone https://github.com/openstack/designate.git /home/vagrant/designate
+sudo -u vagrant git clone https://github.com/openstack/python-designateclient.git /home/vagrant/python-designateclient
+
+pushd /home/vagrant/designate
+git checkout stable/kilo
+popd
 
 # Pre-Install Designate's Dependancies
 pip install -r /home/vagrant/designate/requirements.txt
 pip install -r /home/vagrant/python-designateclient/requirements.txt
 
+# Pre-Install Designate Upstart scripts
+pushd /tmp/files
+ls *.upstart | while read f; do sudo cp $f $(echo /etc/init/$f | sed "s/.upstart$//g"); done
+popd
+
+# Copy over base files for the workshop
+cp /tmp/files/designate.conf /home/vagrant/designate.conf.workshop
+cp /tmp/files/designate.conf /home/vagrant/designate/etc/designate/designate.conf
+cp /tmp/files/install-designate.sh /home/vagrant/install-designate.sh
+
 # Make sure everything in vagrant's home is owned by vagrant
-chown -R vagrant /home/vagrant
+chown -R vagrant:vagrant /home/vagrant/*
+chown -R vagrant:vagrant /home/vagrant/.cache
+chmod 775 /home/vagrant/*.sh
+
+wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+sudo python /tmp/get-pip.py

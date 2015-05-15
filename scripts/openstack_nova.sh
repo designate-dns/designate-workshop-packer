@@ -12,6 +12,8 @@ su -s /bin/sh -c "nova-manage db sync" nova
 
 dpkg-statoverride  --update --add root root 0644 /boot/vmlinuz-$(uname -r)
 
+patch /usr/lib/python2.7/dist-packages/nova/virt/libvirt/driver.py < /tmp/files/nova.diff
+
 service nova-api restart
 service nova-cert restart
 service nova-consoleauth restart
@@ -35,9 +37,5 @@ source /home/vagrant/openrc.user1
 nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
 
 source /home/vagrant/openrc.user2
-
-nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant
-
-source /home/vagrant/openrc.user3
 
 nova keypair-add --pub-key /home/vagrant/.ssh/authorized_keys vagrant

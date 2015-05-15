@@ -16,5 +16,5 @@ mount -o loop $VBOX_ISO /mnt
 yes|sh /mnt/VBoxLinuxAdditions.run
 umount /mnt
 
-#Cleanup VirtualBox
+# Cleanup VirtualBox
 rm $VBOX_ISO

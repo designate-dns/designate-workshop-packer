@@ -2,8 +2,8 @@
     "builders": [
         {
             "type": "virtualbox-iso",
-            "iso_url": "http://ftp.heanet.ie/pub/ubuntu-releases/12.04.4/ubuntu-12.04.4-server-amd64.iso",
-            "iso_checksum": "3aeb42816253355394897ae80d99a9ba56217c0e98e05294b51f0f5b13bceb54",
+            "iso_url": "http://ftp.heanet.ie/pub/ubuntu-releases/14.04.2/ubuntu-14.04.2-server-amd64.iso",
+            "iso_checksum": "8acd2f56bfcba2f7ac74a7e4a5e565ce68c024c38525c0285573e41c86ae90c0",
             "iso_checksum_type": "sha256",
             "boot_wait": "5s",
             "boot_command": [
@@ -18,12 +18,12 @@
             "guest_os_type": "Ubuntu_64",
             "http_directory": "http",
             "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
-            "ssh_wait_timeout": "20m",
+            "ssh_wait_timeout": "30m",
             "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
             "virtualbox_version_file": ".vbox_version",
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
-            "headless": false,
+            "headless": true,
             "vboxmanage": [
               ["modifyvm", "{{.Name}}", "--memory", "1536"],
               ["modifyvm", "{{.Name}}", "--cpus", "2"],
@@ -62,7 +62,7 @@
     "post-processors": [
       {
         "type": "vagrant",
-        "compression_level": 1,
+        "compression_level": 8,
         "output": "designate-workshop_{{.Provider}}.box"
       }
     ]

@@ -1,0 +1,4 @@
+4729c4729
+<         if CONF.libvirt.virt_type not in ['qemu', 'kvm']:
+---
+>         if CONF.libvirt.virt_type not in ['kvm']:
