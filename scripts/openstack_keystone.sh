@@ -20,6 +20,7 @@ export OS_SERVICE_ENDPOINT=http://127.0.0.1:35357/v2.0
 # Roles
 keystone role-create --name=service
 keystone role-create --name=admin
+keystone role-create --name=_member_
 
 # Users/Tenants
 keystone user-create --name=service --pass=password --email=service@designate-workshop.com
@@ -34,14 +35,12 @@ keystone user-role-add --user=admin --tenant=admin --role=admin
 keystone user-role-add --user=admin --tenant=admin --role=_member_
 
 keystone user-create --name=user1 --pass=password --email=user1@designate-workshop.com
-keystone user-create --name=user2 --pass=password --email=user2@designate-workshop.com
-keystone tenant-create --name=tenantA --description="Tenant A"
-keystone user-role-add --user=user1 --tenant=tenantA --role=_member_
-keystone user-role-add --user=user2 --tenant=tenantA --role=_member_
+keystone tenant-create --name=tenant1 --description="Tenant 1"
+keystone user-role-add --user=user1 --tenant=tenant1 --role=_member_
 
-keystone user-create --name=user3 --pass=password --email=user3@designate-workshop.com
-keystone tenant-create --name=tenantB --description="Tenant B"
-keystone user-role-add --user=user3 --tenant=tenantB --role=_member_
+keystone user-create --name=user2 --pass=password --email=user2@designate-workshop.com
+keystone tenant-create --name=tenant2 --description="Tenant 2"
+keystone user-role-add --user=user2 --tenant=tenant2 --role=_member_
 
 # Services
 keystone service-create --name=keystone --type=identity --description="OpenStack Identity Service"
@@ -73,3 +72,8 @@ keystone endpoint-create \
   --publicurl=http://127.0.0.1:9696 \
   --internalurl=http://127.0.0.1:9696 \
   --adminurl=http://127.0.0.1:9696
+
+# OpenRC Files
+cp /tmp/files/openrc.admin /home/vagrant/openrc.admin
+cp /tmp/files/openrc.user1 /home/vagrant/openrc.user1
+cp /tmp/files/openrc.user2 /home/vagrant/openrc.user2

@@ -1,0 +1,18 @@
+description "Designate API"
+
+stop on runlevel [!2345]
+
+chdir /var/run
+
+pre-start script
+  mkdir -p /var/run/designate
+  chown vagrant:root /var/run/designate/
+
+  mkdir -p /var/lock/designate
+  chown vagrant:root /var/lock/designate/
+
+  mkdir -p /var/log/designate
+  chown vagrant:root /var/log/designate/
+end script
+
+exec start-stop-daemon --start --chuid vagrant --exec /usr/local/bin/designate-api -- --config-file=/home/vagrant/designate/etc/designate/designate.conf --config-dir=/home/vagrant/designate/etc/designate

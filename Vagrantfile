@@ -8,6 +8,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 9001, host: 9001
+  config.vm.network "forwarded_port", guest: 35357, host: 35357
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
 
   config.vm.provider "virtualbox" do |box|
   	box.customize ["modifyvm", :id, "--memory", "2048"]
