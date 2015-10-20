@@ -8,7 +8,7 @@ export DEBIAN_FRONTEND=noninteractive
 mysql -e 'CREATE DATABASE `powerdns` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 
 echo "pdns-backend-mysql	pdns-backend-mysql/dbconfig-install	boolean	false" | debconf-set-selections
-apt-get --yes install pdns-server pdns-backend-mysql
+apt-get --yes install pdns-server pdns-backend-mysql zookeeper
 
 cp /tmp/files/pdns.conf /etc/powerdns/pdns.conf
 
@@ -23,6 +23,7 @@ apt-get build-dep --yes python-lxml
 # Clone the designate repos locally
 sudo -u vagrant git clone https://github.com/openstack/designate.git /home/vagrant/designate
 sudo -u vagrant git clone https://github.com/openstack/python-designateclient.git /home/vagrant/python-designateclient
+sudo -u vagrant git clone https://github.com/openstack/designate-dashboard.git /home/vagrant/designate-dashboard
 
 pushd /home/vagrant/designate
 git checkout stable/kilo
