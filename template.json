@@ -2,8 +2,8 @@
     "builders": [
         {
             "type": "virtualbox-iso",
-            "iso_url": "http://ftp.heanet.ie/pub/ubuntu-releases/14.04.2/ubuntu-14.04.2-server-amd64.iso",
-            "iso_checksum": "8acd2f56bfcba2f7ac74a7e4a5e565ce68c024c38525c0285573e41c86ae90c0",
+            "iso_url": "http://ftp.heanet.ie/pub/ubuntu-releases/trusty/ubuntu-14.04.3-server-amd64.iso",
+            "iso_checksum": "a3b345908a826e262f4ea1afeb357fd09ec0558cf34e6c9112cead4bb55ccdfb",
             "iso_checksum_type": "sha256",
             "boot_wait": "5s",
             "boot_command": [
@@ -23,7 +23,7 @@
             "virtualbox_version_file": ".vbox_version",
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
-            "headless": true,
+            "headless": false,
             "vboxmanage": [
               ["modifyvm", "{{.Name}}", "--memory", "1536"],
               ["modifyvm", "{{.Name}}", "--cpus", "2"],
