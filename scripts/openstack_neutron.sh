@@ -18,7 +18,7 @@ cp /tmp/files/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
 
 sed -i "s/%ADMIN_TENANT_ID%/$ADMIN_TENANT_ID/" /etc/neutron/neutron.conf
 
-neutron-db-manage upgrade kilo
+neutron-db-manage upgrade liberty
 
 ip link add type veth
 
