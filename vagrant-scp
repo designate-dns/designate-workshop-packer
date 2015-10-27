@@ -1,0 +1,5 @@
+#!/bin/bash
+
+vagrant ssh-config > .tmp_sshconfig
+
+scp -F .tmp_sshconfig $@
