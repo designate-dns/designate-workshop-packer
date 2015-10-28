@@ -1,23 +1,32 @@
+#!/usr/bin/env python
+
+import os
 import argparse
-from randstr import randstr
 
 from designateclient.v2.client import Client
-from designateclient import shell
 
 from keystoneclient import session as keystone_session
 
 from pprint import pprint
 
+ALPHA = 'abcdefghijklmnopqrstuvwxyz'
+NUMS = '0123456789'
+CHARS = ALPHA + NUMS
+
+
+def randstr(length=7, chars=CHARS):
+    return ''.join(random.choice(chars) for i in range(length))
+
 
 def get_auth():
-    user = 'admin'
-    project = 'admin'
-    password = 'password'
+    user = os.environ['OS_USERNAME']
+    password = os.environ['OS_PASSWORD']
+    tenant_id = os.environ['OS_TENANT_ID']
 
     return v2.Password(auth_url='http://127.0.0.1:5000/v2.0',
                        username=user,
                        password=password,
-                       tenant_id='96c0fbc191524f508bbbf460f67e4a5f')
+                       tenant_id=tenant_id)
 
 
 def get_client(auth):
@@ -33,8 +42,15 @@ def find_zone(client, name):
     return None
 
 
+def create_zone(client, name):
+    zone = c.zones.create(name, email='admin@%s' % name)
+    return zone
+
+
 def get_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-c', '--create', action='store_true',
+                        help='Create the zone'))
     parser.add_argument('zone')
     parser.add_argument('url')
     return parser.parse_args()
@@ -47,8 +63,11 @@ def main():
     zone = find_zone(client, args.zone)
 
     if not zone:
-        print('%s not found' % args.zone)
-        return
+        if args.create:
+            zone = create_zone(client, args.zone)
+        else:
+            print('%s not found' % args.zone)
+            return
 
     name = '%s.%s' % (randstr(), args.zone)
     pprint(client.recordsets.create(zone['id'], name, 'CNAME', [str(args.url)]))
