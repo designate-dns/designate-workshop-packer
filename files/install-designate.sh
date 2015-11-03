@@ -5,7 +5,7 @@ set -ex
 # Install Designate and its dependencies
 cd /home/vagrant/designate
 sudo pip install -r requirements.txt
-sudo python setup.py develop
+sudo pip install -e .
 
 # Make copies of designate config files from templates
 cd /home/vagrant/designate/etc/designate
@@ -51,6 +51,10 @@ sudo start designate-mdns
 sudo stop designate-pool-manager || :
 sudo start designate-pool-manager
 
+# Start the Designate Zone Manager Service
+sudo stop designate-zone-manager || :
+sudo start designate-zone-manager
+
 # Setup the Designate Keystone service and endpoints
 # First set user 'admin' particulars then create service and endpoint
 source /home/vagrant/openrc.admin
@@ -63,10 +67,10 @@ keystone endpoint-create --service designate --publicurl http://127.0.0.1:9001 -
 # Install Designate Client
 cd /home/vagrant/python-designateclient
 sudo pip install -r requirements.txt
-sudo python setup.py develop
+sudo pip install -e .
 
 # Install Designate Horizon Panels
-cd /home/vagrant/designate/contrib/designate-dashboard
+cd /home/vagrant/designate-dashboard
 rm -rf dist/*
 python setup.py sdist
 sudo pip install dist/*.tar.gz
