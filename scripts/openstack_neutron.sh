@@ -11,6 +11,7 @@ source /home/vagrant/openrc.admin
 ADMIN_TENANT_ID=`keystone tenant-list | grep ' admin ' | cut -d' ' -f2`
 
 cp /tmp/files/neutron.conf /etc/neutron/neutron.conf
+cp /tmp/files/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
 cp /tmp/files/dhcp_agent.ini /etc/neutron/dhcp_agent.ini
 cp /tmp/files/l3_agent.ini /etc/neutron/l3_agent.ini
 cp /tmp/files/metadata_agent.ini /etc/neutron/metadata_agent.ini
