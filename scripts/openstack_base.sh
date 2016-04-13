@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
 apt-get install --yes --force-yes software-properties-common
-/usr/bin/add-apt-repository --yes cloud-archive:liberty
+/usr/bin/add-apt-repository --yes cloud-archive:mitaka
 apt-get update
 
 apt-get install --yes git jq mysql-server rabbitmq-server vim python-pip python-virtualenv python-mysqldb python-novaclient python-glanceclient python-keystoneclient python-neutronclient python-openstackclient
