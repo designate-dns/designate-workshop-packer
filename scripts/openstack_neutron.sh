@@ -12,9 +12,13 @@ ADMIN_TENANT_ID=`keystone tenant-list | grep ' admin ' | cut -d' ' -f2`
 
 cp /tmp/files/neutron.conf /etc/neutron/neutron.conf
 cp /tmp/files/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
+cp /tmp/files/linuxbridge_agent.ini /etc/neutron/plugins/ml2/linuxbridge_agent.ini 
 cp /tmp/files/dhcp_agent.ini /etc/neutron/dhcp_agent.ini
 cp /tmp/files/l3_agent.ini /etc/neutron/l3_agent.ini
 cp /tmp/files/metadata_agent.ini /etc/neutron/metadata_agent.ini
+sudo cp /tmp/files/neutron_sudoers /etc/sudoers.d/neutron_sudoers
+sudo chown root:root /etc/sudoers.d/neutron_sudoers
+sudo chmod 0440 /etc/sudoers.d/neutron_sudoers
 
 sed -i "s/%ADMIN_TENANT_ID%/$ADMIN_TENANT_ID/" /etc/neutron/neutron.conf
 
