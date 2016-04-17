@@ -14,6 +14,7 @@ ls *.sample | while read f; do cp $f $(echo $f | sed "s/.sample$//g"); done
 # Copy over config file with pre-set values to designate.conf
 # (Replace contents of designate.conf with contents of file /home/vagrant/designate.conf.wkshp)
 cp /home/vagrant/designate.conf.workshop ./designate.conf
+cp /home/vagrant/pools.yaml ./pools.yaml
 
 # Create directory for maintaining designate state information (this directory was referenced by 'state_path' variable in designate.conf file)
 mkdir /home/vagrant/state/ || :
@@ -26,14 +27,6 @@ mkdir /home/vagrant/logs/ || :
 mysql -e 'DROP DATABASE IF EXISTS `designate`;'
 mysql -e 'CREATE DATABASE `designate` CHARACTER SET utf8 COLLATE utf8_general_ci;'
 designate-manage database sync
-
-# The PowerDNS database
-mysql -e 'DROP DATABASE IF EXISTS `powerdns`;'
-mysql -e 'CREATE DATABASE `powerdns` CHARACTER SET utf8 COLLATE utf8_general_ci;'
-designate-manage powerdns sync f26e0b32-736f-4f0a-831b-039a415c481e
-
-# Restart pDNS after replacing it's DB
-sudo service pdns restart
 
 # Start the Designate Central Service
 sudo stop designate-central || :
@@ -55,6 +48,21 @@ sudo start designate-pool-manager
 sudo stop designate-zone-manager || :
 sudo start designate-zone-manager
 
+# Populate the Pools DB Tab
+designate-manage pool update --file pools.yaml
+
+# The PowerDNS database
+mysql -e 'DROP DATABASE IF EXISTS `powerdns`;'
+mysql -e 'CREATE DATABASE `powerdns` CHARACTER SET utf8 COLLATE utf8_general_ci;'
+designate-manage powerdns sync 794ccc2c-d751-44fe-b57f-8894c9f5c842
+
+# Restart pDNS after replacing it's DB
+sudo service pdns restart
+
+# Restart the Designate Pool Manager Service to get new pool config
+sudo stop designate-pool-manager || :
+sudo start designate-pool-manager
+
 # Setup the Designate Keystone service and endpoints
 # First set user 'admin' particulars then create service and endpoint
 source /home/vagrant/openrc.admin
@@ -74,6 +82,6 @@ cd /home/vagrant/designate-dashboard
 rm -rf dist/*
 python setup.py sdist
 sudo pip install dist/*.tar.gz
-sudo cp designatedashboard/enabled/_70_dns_add_group.py /usr/share/openstack-dashboard/openstack_dashboard/local/enabled
-sudo cp designatedashboard/enabled/_71_dns_project.py /usr/share/openstack-dashboard/openstack_dashboard/local/enabled
+sudo cp designatedashboard/enabled/_1710_project_dns_panel_group.py /usr/share/openstack-dashboard/openstack_dashboard/local/enabled
+sudo cp designatedashboard/enabled/_1720_project_dns_panel.py /usr/share/openstack-dashboard/openstack_dashboard/local/enabled
 sudo service apache2 restart

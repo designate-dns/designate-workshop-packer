@@ -22,4 +22,7 @@ files:
 build: packer files
 	./packer/packer build template.json
 
+debug: packer files
+	./packer/packer build -debug template.json
+
 .PHONY: all clean files build
