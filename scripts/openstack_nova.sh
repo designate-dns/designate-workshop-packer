@@ -9,6 +9,7 @@ apt-get --yes install nova-api nova-cert nova-conductor nova-consoleauth nova-no
 cp /tmp/files/nova.conf /etc/nova/nova.conf
 
 su -s /bin/sh -c "nova-manage db sync" nova
+su -s /bin/sh -c "nova-manage api_db sync" nova
 
 dpkg-statoverride  --update --add root root 0644 /boot/vmlinuz-$(uname -r)
 
