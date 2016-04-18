@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-
 import requests
-from designateclient.client import Client
+
+from designateclient import shell
+from designateclient.v2.client import Client
 from designateclient import exceptions
-from keystoneclient import session
-from keystoneclient.auth.identity import v2
+from keystoneclient import session as keystone_session
+from keystoneclient.auth.identity import generic
+
 
 url = 'http://myexternalip.com'
 try:
@@ -13,19 +15,16 @@ try:
 except Exception:
     ip = '127.0.0.1'
 
-user = 'admin'
-project = 'admin'
-password = 'password'
+auth = generic.Password(
+        auth_url=shell.env('OS_AUTH_URL'),
+        username=shell.env('OS_USERNAME'),
+        password=shell.env('OS_PASSWORD'),
+        tenant_name=shell.env('OS_TENANT_NAME')
+    )
 
-
-auth = v2.Password(auth_url='http://127.0.0.1:5000/v2.0',
-                   username=user,
-                   password=password,
-                   tenant_id='96c0fbc191524f508bbbf460f67e4a5f')
-
-sess = session.Session(auth=auth)
-
-client = Client('2', session=sess, http_log_debug=True, region_name='regionOne')
+endpoint = 'http://127.0.0.1:9001/v2'
+session = keystone_session.Session(auth=auth)
+client = Client(session=session, endpoint_override=endpoint)
 
 try:
     client.recordsets.create('example.com.', 'me.example.com.', 'A', [ip], 'Auto-Generated Record')

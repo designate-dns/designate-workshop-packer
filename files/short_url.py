@@ -2,10 +2,13 @@
 
 import os
 import argparse
+import random
 
 from designateclient.v2.client import Client
+from designateclient import shell
 
 from keystoneclient import session as keystone_session
+from keystoneclient.auth.identity import generic
 
 from pprint import pprint
 
@@ -19,18 +22,19 @@ def randstr(length=7, chars=CHARS):
 
 
 def get_auth():
-    user = os.environ['OS_USERNAME']
-    password = os.environ['OS_PASSWORD']
-    tenant_id = os.environ['OS_TENANT_ID']
+    auth = generic.Password(
+        auth_url=shell.env('OS_AUTH_URL'),
+        username=shell.env('OS_USERNAME'),
+        password=shell.env('OS_PASSWORD'),
+        tenant_name=shell.env('OS_TENANT_NAME')
+    )
 
-    return v2.Password(auth_url='http://127.0.0.1:5000/v2.0',
-                       username=user,
-                       password=password,
-                       tenant_id=tenant_id)
+    return auth
 
 
 def get_client(auth):
     endpoint = 'http://127.0.0.1:9001/v2'
+
     session = keystone_session.Session(auth=auth)
     return Client(session=session, endpoint_override=endpoint)
 
@@ -43,14 +47,14 @@ def find_zone(client, name):
 
 
 def create_zone(client, name):
-    zone = c.zones.create(name, email='admin@%s' % name)
+    zone = client.zones.create(name, email='admin@%s' % name.strip('.'))
     return zone
 
 
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--create', action='store_true',
-                        help='Create the zone'))
+                        help='Create the zone')
     parser.add_argument('zone')
     parser.add_argument('url')
     return parser.parse_args()
@@ -72,7 +76,6 @@ def main():
     name = '%s.%s' % (randstr(), args.zone)
     pprint(client.recordsets.create(zone['id'], name, 'CNAME', [str(args.url)]))
     print('Created %s CNAME for %s' % (name, args. url))
-
 
 if __name__ == '__main__':
     main()

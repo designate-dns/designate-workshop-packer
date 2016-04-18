@@ -53,6 +53,8 @@ cp /tmp/files/install-designate.sh /home/vagrant/install-designate.sh
 cp /tmp/files/pools.yaml /home/vagrant/pools.yaml
 cp /tmp/files/example.py /home/vagrant/example.py
 cp /tmp/files/short_url.py /home/vagrant/short_url.py
+cp /tmp/files/client.sh /home/vagrant/client.sh
+cp /tmp/files/importdemo.txt /home/vagrant/importdemo.txt
 
 # Make sure everything in vagrant's home is owned by vagrant
 chown -R vagrant:vagrant /home/vagrant/*
