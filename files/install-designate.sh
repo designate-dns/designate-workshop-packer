@@ -67,10 +67,11 @@ sudo start designate-pool-manager
 # First set user 'admin' particulars then create service and endpoint
 source /home/vagrant/openrc.admin
 
-keystone service-list | grep designate | awk '{print $2}' | xargs --no-run-if-empty -n 1 keystone service-delete
+openstack service list -f value | grep designate | awk '{print $1}' | xargs --no-run-if-empty -n 1 openstack service delete
 
-keystone service-create --name designate --type dns --description "Designate Service"
-keystone endpoint-create --service designate --publicurl http://127.0.0.1:9001 --adminurl http://127.0.0.1:9001 --internalurl http://127.0.0.1:9001
+openstack service create --name designate --description "Designate Service" dns
+
+openstack endpoint create designate --adminurl http://127.0.0.1:9001 --publicurl http://127.0.0.1:9001 --internalurl http://127.0.0.1:9001
 
 # Install Designate Client
 cd /home/vagrant/python-designateclient
