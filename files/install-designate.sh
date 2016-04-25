@@ -71,8 +71,7 @@ openstack service list -f value | grep designate | awk '{print $1}' | xargs --no
 
 openstack service create --name designate --description "Designate Service" dns
 
-openstack endpoint create designate --adminurl http://127.0.0.1:9001 --publicurl http://127.0.0.1:9001 --internalurl http://127.0.0.1:9001
-
+openstack endpoint create designate --adminurl http://127.0.0.1:9001 --publicurl http://127.0.0.1:9001 --internalurl http://127.0.0.1:9001 --region regionOne
 # Install Designate Client
 cd /home/vagrant/python-designateclient
 sudo pip install -r requirements.txt
