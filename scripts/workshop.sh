@@ -26,11 +26,11 @@ sudo -u vagrant git clone https://github.com/openstack/python-designateclient.gi
 sudo -u vagrant git clone https://github.com/openstack/designate-dashboard.git /home/vagrant/designate-dashboard
 
 pushd /home/vagrant/designate
-git checkout stable/liberty
+git checkout stable/mitaka
 popd
 
 pushd /home/vagrant/designate-dashboard
-git checkout stable/liberty
+git checkout stable/mitaka
 popd
 
 wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
@@ -50,8 +50,11 @@ popd
 cp /tmp/files/designate.conf /home/vagrant/designate.conf.workshop
 cp /tmp/files/designate.conf /home/vagrant/designate/etc/designate/designate.conf
 cp /tmp/files/install-designate.sh /home/vagrant/install-designate.sh
+cp /tmp/files/pools.yaml /home/vagrant/pools.yaml
 cp /tmp/files/example.py /home/vagrant/example.py
 cp /tmp/files/short_url.py /home/vagrant/short_url.py
+cp /tmp/files/client.sh /home/vagrant/client.sh
+cp /tmp/files/importdemo.txt /home/vagrant/importdemo.txt
 
 # Make sure everything in vagrant's home is owned by vagrant
 chown -R vagrant:vagrant /home/vagrant/*

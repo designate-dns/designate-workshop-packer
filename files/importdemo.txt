@@ -1,0 +1,8 @@
+$ORIGIN designatedemo.com.
+designatedemo.com. 300 IN SOA ns.designatedemo.com. nsadmin.designatedemo.com. 1000 1001 1002 1003 1004
+designatedemo.com. 300 IN NS ns.designatedemo.com.
+ns.designatedemo.com. 300 IN A 1.2.3.4
+www.designatedemo.com. 300 IN A 66.55.237.26
+www2.designatedemo.com. 300 IN A 45.16.124.233
+google.designatedemo.com. 300 IN CNAME google.com.
+
